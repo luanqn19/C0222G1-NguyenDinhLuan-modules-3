@@ -2,32 +2,33 @@ create database quanlybanhang;
 -- drop database quanlybanhang;
 use quanlybanhang;
 
-create table customer (
-	cID int(5) not null AUTO_INCREMENT,
-    cName VARCHAR(50) not null,
-    cAge int not null,
+CREATE TABLE customer (
+    cID INT(5) AUTO_INCREMENT,
+    cName VARCHAR(50) NOT NULL,
+    cAge INT NOT NULL,
     PRIMARY KEY (cID)
 );
 
-create table orderproduct (
-	oID int(5) not null AUTO_INCREMENT,
-    cID int(5) not null,
-    oDate date not null,
-    oTotalPrice double not null,
-    PRIMARY KEY (oID, cID)
+CREATE TABLE orderproduct (
+    oID INT(5) AUTO_INCREMENT,
+    cID INT(5) ,
+    oDate DATE NOT NULL,
+    oTotalPrice DOUBLE NOT NULL,
+    PRIMARY KEY (oID)
 );
 
-create table product (
-	pID int(5) not null AUTO_INCREMENT,
-    pName VARCHAR(50) not null,
-    pPrice DOUBLE not null,
+CREATE TABLE product (
+    pID INT(5) AUTO_INCREMENT,
+    pName VARCHAR(50) NOT NULL,
+    pPrice DOUBLE NOT NULL,
     PRIMARY KEY (pID)
 );
 
-create table orderproductdetail (
-	oID int(5) not null,
-    pID int(5) not null,
-    amount int not null
+CREATE TABLE orderproductdetail (
+    oID INT(5),
+    pID INT(5),
+    amount INT NOT NULL,
+    PRIMARY KEY (oID , pID)
 );
 
 -- add foreign key orderproduct
@@ -59,5 +60,5 @@ insert into product(pName, pPrice) values ("Vai",1200);
 
 -- detail
 insert into orderproductdetail values (10000,10000,5);
-insert into orderproductdetail values (10000,10000,5);
+-- insert into orderproductdetail values (10000,10000,5);
 insert into orderproductdetail values (10001,10001,10);

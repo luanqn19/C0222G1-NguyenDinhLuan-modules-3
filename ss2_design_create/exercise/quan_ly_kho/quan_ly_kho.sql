@@ -1,18 +1,18 @@
 create database quanlykho;
 use quanlykho;
-
-CREATE TABLE vat_tu (
-    ma_vat_tu VARCHAR(5),
-    ten_vat_tu VARCHAR(50),
-    PRIMARY KEY (ma_vat_tu)
-);
+-- drop database quanlykho;
 
 CREATE TABLE nha_cung_cap (
     ma_nha_cung_cap VARCHAR(5),
+    so_don_dat VARCHAR(5),
     ten_nha_cung_cap VARCHAR(50),
     dia_chi VARCHAR(50),
-    so_dien_thoai VARCHAR(11),
     PRIMARY KEY (ma_nha_cung_cap)
+);
+
+CREATE TABLE sdt_nha_cung_cap (
+    ma_so_cung_cap VARCHAR(5),
+    so_dien_thoai VARCHAR(11)
 );
 
 CREATE TABLE don_dat_hang (
@@ -21,12 +21,17 @@ CREATE TABLE don_dat_hang (
     PRIMARY KEY (so_don_dat_hang)
 );
 
+CREATE TABLE vat_tu (
+    ma_vat_tu VARCHAR(5),
+    ten_vat_tu VARCHAR(50),
+    PRIMARY KEY (ma_vat_tu)
+);
+
 CREATE TABLE chi_tiet_don_dat_hang (
     ma_dat VARCHAR(5),
     ma_vat_tu VARCHAR(5),
-    ma_nha_cung_cap VARCHAR(5),
     so_luong_dat INT,
-    PRIMARY KEY (ma_dat , ma_vat_tu , ma_nha_cung_cap)
+    PRIMARY KEY (ma_dat , ma_vat_tu)
 );
 
 CREATE TABLE phieu_xuat (
@@ -56,11 +61,17 @@ CREATE TABLE chi_tiet_phieu_nhap (
     so_luong_nhap INT,
     PRIMARY KEY (phieu_nhap , ma_vat_tu)
 );
+
+alter table sdt_nha_cung_cap
+add constraint fk_sdt_cung_cap FOREIGN KEY (ma_so_cung_cap) REFERENCES nha_cung_cap(ma_nha_cung_cap);
+
+alter table nha_cung_cap
+add constraint fk_nha_cung_cap FOREIGN KEY (so_don_dat) REFERENCES don_dat_hang(so_don_dat_hang);
+
 -- them khoa phu chi_tiet_don_dat_hang
 alter table chi_tiet_don_dat_hang
 add CONSTRAINT fk_ma_dat FOREIGN KEY(ma_dat) REFERENCES don_dat_hang(so_don_dat_hang),
-add CONSTRAINT fk_ma_vat_tu FOREIGN KEY(ma_vat_tu) REFERENCES vat_tu(ma_vat_tu),
-add CONSTRAINT fk_ma_nha_cung_cap FOREIGN KEY(ma_nha_cung_cap) REFERENCES nha_cung_cap(ma_nha_cung_cap);
+add CONSTRAINT fk_ma_vat_tu FOREIGN KEY(ma_vat_tu) REFERENCES vat_tu(ma_vat_tu);
 
 -- them khoa phu chi_tiet_phieu_xuat
 alter table chi_tiet_phieu_xuat
@@ -72,18 +83,23 @@ alter table chi_tiet_phieu_nhap
 add CONSTRAINT fk_phieu_nhap FOREIGN KEY(phieu_nhap) REFERENCES phieu_nhap(so_phieu_nhap),
 add CONSTRAINT fk_ma_vat_tu_phieu_nhap FOREIGN KEY(ma_vat_tu) REFERENCES vat_tu(ma_vat_tu);
 
+insert into don_dat_hang values ("DDH01",'2022-05-10');
+insert into don_dat_hang values ("DDH02",'2022-05-08');
+
+insert into nha_cung_cap values ("NCC01","DDH01","NCC-01","Dia chi 1");
+insert into nha_cung_cap values ("NCC02","DDH02","NCC-02","Dia chi 2");
+
+INSERT INTO sdt_nha_cung_cap VALUES("NCC01","090000001");
+INSERT INTO sdt_nha_cung_cap VALUES("NCC01","090000002");
+INSERT INTO sdt_nha_cung_cap VALUES("NCC02","090000003");
+INSERT INTO sdt_nha_cung_cap VALUES("NCC02","090000004");
+
 -- them du lieu cho cac table
 insert into vat_tu values ("VT001","Vat tu 1");
 insert into vat_tu values ("VT002","Vat tu 2");
 
-insert into nha_cung_cap values ("NCC01","NCC-01","Dia chi 1","0900000");
-insert into nha_cung_cap values ("NCC02","NCC-02","Dia chi 2","0900001");
-
-insert into don_dat_hang values ("DDH01",'2022-05-10');
-insert into don_dat_hang values ("DDH02",'2022-05-08');
-
-insert into chi_tiet_don_dat_hang values ("DDH01","VT001","NCC01",100);
-insert into chi_tiet_don_dat_hang values ("DDH02","VT002","NCC02",200);
+insert into chi_tiet_don_dat_hang values ("DDH01","VT001",100);
+insert into chi_tiet_don_dat_hang values ("DDH02","VT002",200);
 
 insert into phieu_xuat values ("PXK01",'2022-05-12');
 insert into phieu_xuat values ("PXK02",'2022-05-10');
