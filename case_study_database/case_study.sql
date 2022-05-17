@@ -180,7 +180,7 @@ SELECT
     ldv.ten_loai_dich_vu
 FROM
     ((hop_dong AS hd
-    INNER JOIN dich_vu AS dv ON hd.ma_dich_vu = dv.ma_dich_vu)
+    INNER JOIN dich_vu AS dv ON (hd.ma_dich_vu = dv.ma_dich_vu AND YEAR(hd.ngay_lam_hop_dong) = 2021))
     INNER JOIN loai_dich_vu AS ldv ON hd.ma_dich_vu = dv.ma_dich_vu
         AND dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu)
 WHERE MONTH(hd.ngay_ket_thuc) NOT IN (1 , 2, 3);
@@ -188,6 +188,7 @@ WHERE MONTH(hd.ngay_ket_thuc) NOT IN (1 , 2, 3);
 
 -- Task 7
 SELECT 
+	hd.ma_hop_dong,
     dv.ma_dich_vu,
     dv.ten_dich_vu,
     dv.dien_tich,
@@ -199,12 +200,25 @@ FROM
     LEFT JOIN dich_vu AS dv ON hd.ma_dich_vu = dv.ma_dich_vu AND YEAR(hd.ngay_lam_hop_dong) = 2020)
     LEFT JOIN loai_dich_vu AS ldv ON hd.ma_dich_vu = dv.ma_dich_vu
         AND dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu)
-WHERE hd.ma_dich_vu AND YEAR(hd.ngay_lam_hop_dong)  NOT IN (
-    SELECT *
+WHERE hd.ma_dich_vu NOT IN (
+    SELECT hd.ma_dich_vu
 	FROM hop_dong AS hd
-	LEFT JOIN dich_vu AS dv ON hd.ma_dich_vu = dv.ma_dich_vu
 	WHERE YEAR(hd.ngay_lam_hop_dong) = 2021
     );
 
+-- Task 8
+-- Cach 1
 
+-- Cach 2
 
+-- Cach 3
+
+-- Task 9
+SELECT 
+    MONTH(hd.ngay_lam_hop_dong) AS Thang,
+    COUNT(MONTH(hd.ngay_lam_hop_dong)) AS So_Lan_Dat
+FROM
+    (hop_dong AS hd
+    INNER JOIN dich_vu AS dv ON (hd.ma_dich_vu = dv.ma_dich_vu AND YEAR(hd.ngay_lam_hop_dong) = 2021))
+GROUP BY Thang 
+ORDER BY Thang ASC;
