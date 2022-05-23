@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+}
+.container {
+    margin-left: 10%;
+    margin-right: 10%;;
+}
+.header {
+    width: 100%;
+    height: 50px;
+    background-image: url("bg_header_2017.jpg");
+}
+.nav-header {
+    height: fit-content;
+}
+.logo {
+    margin-right: 60px;
+    float: left;
+    padding-top: 13px;
+    width: max-content;
+}
+.search-box {
+    float: left;
+    padding-top: 7px;
+    width: 60%;
+}
+.search {
+    width: inherit;
+    height: 30px;
+}
+.login-register {
+    font-family: Arial, sans-serif, "Times New Roman";
+    color: white;
+}
+.nav-account {
+    float: left;
+    width: fit-content;
+    height: fit-content;
+}
+#main-nav-bar {
+    background-color: #E4E4E4;
+    height: 40px;
+}
+.menu {
+
+}
+ul {
+    margin: 0;
+    padding: 0;
+    width: inherit;
+    list-style-type: none;
+}
+
+li {
+    font-family: Arial, sans-serif, "Times New Roman";
+    text-transform: uppercase;
+    float: left;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    border-right: solid 1px #ddd;
+}
+li:hover {
+    background-color: #EEEEEE;
+    cursor: pointer;
+    color: blueviolet;
+}
+.page-title {
+    font-family: Arial, sans-serif, "Times New Roman";
+    font-weight: normal;
+    font-size: 20px;
+    color: #2980b9;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.slideshow-container {
+    overflow: hidden;
+    width: 1000px;
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+img {
+    width: inherit;
+    height: inherit;
+}
+.slides {
+    float: left;
+    padding: 10px;
+    width: 180px;
+    height: 240px;
+}
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    margin-top: -22px;
+    padding: 16px;
+    background-color: white;
+    opacity: 0.5;
+    font-weight: bold;
+    font-size: 18px;
+    border: solid transparent;
+    border-radius: 100%;
+    user-select: none;
+}
+.next {
+    right: 10px;
+}
+.prev {
+    left: 10px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.list-menu {
+    margin-left: 22px;
+}
