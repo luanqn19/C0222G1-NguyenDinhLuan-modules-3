@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.nav-item img {
+    width: 108px;
+    height: 23px;
+}
+#logo-page {
+    border-right: solid 2px;
+    padding: 0 5px;
+}
+.navbar, .navbar-expand-sm, .bg-light, .navbar-light {
+    padding: 16px 6px 16px 10px;
+    height: 45px;
+}
+.surface-item {
+    margin-left: 10px;
+    font-weight: bold;
+}
+.surface-item:hover {
+    border-bottom: solid 2px;
+}
+.icon-control:hover {
+    border-bottom: none !important;
+}
+.title-nav {
+    padding-top: 3px;
+    font-size: 13px;
+}
+.title-nav:hover {
+    border-bottom: solid 2px;
+}
