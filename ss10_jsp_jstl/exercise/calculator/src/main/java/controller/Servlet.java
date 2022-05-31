@@ -10,8 +10,8 @@ import java.io.IOException;
 @WebServlet(name = "Servlet", urlPatterns = "/calculator")
 public class Servlet extends HttpServlet {
     protected void doPost (HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
-        int number1 = 0;
-        int number2 = 0;
+        double number1 = 0;
+        double number2 = 0;
         boolean flag;
 
         do {
@@ -26,30 +26,45 @@ public class Servlet extends HttpServlet {
         } while (!flag);
 
         String operation = request.getParameter("operation");
-        int result = 0;
-
-        if (operation.equals("cong")) {
-            result = number1 + number2;
-            operation = " + ";
-        }
-        else if (operation.equals("tru")) {
-            result = number1 - number2;
-            operation = " - ";
-        }
-        else if (operation.equals("nhan")) {
-            result = number1 * number2;
-            operation = " * ";
-        }
-        else {
-            result = number1 / number2;
-            operation = " / ";
-        }
+        String str = calculator(operation, number1, number2);
+        double result = Double.parseDouble(str.split(",")[0]);
+        operation = str.split(",")[1];
 
         request.setAttribute("operation", operation);
         request.setAttribute("number1", number1);
         request.setAttribute("number2", number2);
         request.setAttribute("result", result);
         request.getRequestDispatcher("display.jsp").forward(request,response);
+    }
+
+    protected String calculator (String operator, double number1, double number2) {
+        double result = 0;
+        String calc = "";
+        if (operator.equals("cong")) {
+            result = number1 + number2;
+            operator = " + ";
+            calc = result + "," + operator;
+        }
+        else if (operator.equals("tru")) {
+            result = number1 - number2;
+            operator = " - ";
+            calc = result + "," + operator;
+        }
+        else if (operator.equals("nhan")) {
+            result = number1 * number2;
+            operator = " * ";
+            calc = result + "," + operator;
+        }
+        else {
+            try {
+                result = (number1 / number2);
+            } catch (ArithmeticException e) {
+                e.printStackTrace();
+            }
+            operator = " / ";
+            calc = result + "," + operator;
+        }
+        return calc;
     }
 
     protected void doGet (HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
